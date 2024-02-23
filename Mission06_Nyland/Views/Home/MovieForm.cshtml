@@ -9,14 +9,23 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-@model Mission06_Nyland.Models.Form
+@model Mission06_Nyland.Models.Movie
 
 <h2>Fill Out This Movie Form!</h2>
 
+<br />
+
 <form method="post">
 
-    <label asp-for="Category">Category:</label>
-    <input asp-for="Category" />
+    <input type="hidden" asp-for="MovieId" />
+
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category m in ViewBag.Categories)
+        {
+            <option value="@m.CategoryId">@m.CategoryName</option>
+        }
+    </select>
     <br /><br />
     <label asp-for="Title">Title:</label>
     <input asp-for="Title" />
@@ -43,6 +52,12 @@
     <br /><br />
     <label asp-for="LentTo">Lent To:</label>
     <input asp-for="LentTo" />
+    <br /><br />
+    <label asp-for="CopiedToPlex">Was the movie copied to Plex?</label>
+    <select asp-for="CopiedToPlex">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
     <br /><br />
     <label asp-for="Notes">Notes:</label>
     <input asp-for="Notes" maxlength="25"/>
